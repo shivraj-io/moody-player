@@ -1,0 +1,33 @@
+// isko alaga is liye banaya becouase we can chanf=ge cloud service provider as per our needs
+
+var ImageKit = require('imagekit');
+var mongoose  = require('mongoose');
+
+
+var imagekit = new ImageKit({
+    publicKey:process.env.IMAGEKIT_PUBLIC_KEY,
+    privateKey:process.env.IMAGEKIT_PRIVATE_KEY,
+    urlEndpoint:process.env.IMAGEKIT_URL_ENDPOINT
+
+});
+
+
+//async ka use nahi hoga yha pr
+function uploadFile(file){
+    return new Promise((resolve ,reject)=>{
+      imagekit.upload({
+        file:file.buffer,
+        fileName: new mongoose.Types.ObjectId().toString() , // fileName should be unique
+        folder:"cohort-audio" // folder name in imagekit
+      },(error,result)=>{
+        if(error){
+            reject(error);
+        }
+        else{
+            resolve(result);
+        }
+      })
+    });
+}
+
+module.exports =uploadFile;
