@@ -1,11 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as faceapi from 'face-api.js';
 import './FaceExpression.css';
 import axios from 'axios';
 
 
+
 export default function FacialExpression({setSongs}) {
   const videoRef = useRef();
+  const [faceDetected, setFaceDetected] = useState(false);
 
   async function detectMood() { 
     const video = videoRef.current;
@@ -15,8 +17,11 @@ export default function FacialExpression({setSongs}) {
 
     if (!detections || detections.length === 0) {
       console.log("No face detected.");
+      setFaceDetected(false);
       return;
     }
+
+    setFaceDetected(true);
 
     let mostProbableExpression = 0;
     let _expression = '';
@@ -32,7 +37,7 @@ export default function FacialExpression({setSongs}) {
     axios.get(`http://localhost:3000/songs?mood=${_expression}`)
       .then(response => {
         console.log(response.data)
-        setSongs(response.data.songs);
+  setSongs(response.data.songs);
       });
   }
  
@@ -65,10 +70,8 @@ export default function FacialExpression({setSongs}) {
         muted
         width="720"
         height="560"
-        
       />
-      
-      <button  onClick={detectMood}>Detect Mood</button>
+  <button onClick={detectMood}>Detect Mood</button>
     </div>
   );
 }

@@ -1,24 +1,24 @@
 import React from "react";
-import FaceExpressionDetector from "./components/FaceExpressionDetector";
-import MoodSongs from "./components/MoodSongs";
-import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import About from "./components/About";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
+import "./App.css";
 
-function App() {
-
-const [Songs,setSongs]= useState([
-        
-    ])
-
-
-
+export default function App() {
   return (
-    <div>
-      <h2 style={{ textAlign: "center" ,margin:"20px"}}>Moody Player</h2>
-      <FaceExpressionDetector setSongs={setSongs} />
-      <MoodSongs Songs={Songs}/>
-      
-    </div>
+    <Router>
+      <div className="app-container">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
   );
 }
-
-export default App;

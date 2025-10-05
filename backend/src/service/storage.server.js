@@ -13,12 +13,16 @@ var imagekit = new ImageKit({
 
 
 //async ka use nahi hoga yha pr
-function uploadFile(file){
+// Updated function to support mood-based folders
+function uploadFile(file, mood){
     return new Promise((resolve ,reject)=>{
+      // Mood-wise folder structure
+      const folderPath = mood ? `moody-player/songs/${mood}` : "moody-player/songs";
+      
       imagekit.upload({
         file:file.buffer,
         fileName: new mongoose.Types.ObjectId().toString() , // fileName should be unique
-        folder:"cohort-audio" // folder name in imagekit
+        folder: folderPath // folder name in imagekit - mood-wise
       },(error,result)=>{
         if(error){
             reject(error);

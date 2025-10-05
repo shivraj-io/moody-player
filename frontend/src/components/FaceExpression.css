@@ -1,27 +1,69 @@
-.user-video-feed{
-    padding: 4rem;
-    width: 20rem;
-    object-fit: cover;
-    border-radius: 5rem;
-    aspect-ratio: 16/9;
-    
-}
-
-.mood-element{
+.mood-element {
     width: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap:1rem;
-    justify-content: flex-start;
-    padding: 4rem;
+    justify-content: center;
+    gap: 2rem;
+    padding: 3rem 2rem;
+    background: white;
+    border-radius: 25px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-.mood-element button{
-    padding: 1rem 2rem;
-    border-radius: 10px;
-    background-color: #272a27; /* Green */
+.user-video-feed {
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    border: 4px solid #667eea;
+}
+
+.mood-element button {
+    padding: 1.2rem 3rem;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     font-size: 1.2rem;
+    font-weight: 700;
     border: none;
     cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.mood-element button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+}
+
+.mood-element button:active {
+    transform: translateY(-1px);
+}
+
+.mood-element button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+@media (max-width: 768px) {
+    .mood-element {
+        padding: 2rem 1.5rem;
+    }
+
+    .user-video-feed {
+        max-width: 100%;
+    }
+
+    .mood-element button {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+    }
 }

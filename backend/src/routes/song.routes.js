@@ -25,7 +25,9 @@ mood
 router.post('/songs',upload.single("audio"),async (req,res)=>{
   console.log(req.body);
   console.log(req.file);  //filee ka data buffer me ayega
-  const fileData = await uploadFile(req.file);
+  
+  // Pass mood to uploadFile function for folder organization
+  const fileData = await uploadFile(req.file, req.body.mood);
 
   const song =await songModel.create({
     title:req.body.title,
